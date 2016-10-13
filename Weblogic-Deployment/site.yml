@@ -1,0 +1,15 @@
+---
+- hosts: ecx-host
+  vars_files:
+    - variables.yml
+    - password.yml
+  roles:
+  - audit-portlet 
+  - base-theme
+  - dashboard-layout
+  - ecx-liferay-autosetup
+  - ecx-portlet
+  - liferay-portal
+  - logout-theme
+  - marketplace-portlet
+  - portal-hook

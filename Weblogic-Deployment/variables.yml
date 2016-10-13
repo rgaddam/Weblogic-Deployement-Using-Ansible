@@ -1,0 +1,27 @@
+### Admin Server Details 
+admin_server_hostname=1.2.3.4
+admin_server_port=7001
+weblogic_home=
+weblogic_admin=weblogic
+#weblogic_admin_pass=
+cluster_server=ECX-Server
+
+### Managed Server Details ####
+server_hostname_1=1.2.3.4
+server_hostname_2=1.3.4.4
+managed_server-1_port=7004
+managed_server-2_port=7004
+managed_server_name-1=MServer1
+managed_server_name-2=MServer2
+
+###  Application-WAR File Details 
+
+Application-1= Warfile Version
+Application-2=
+Application-3=
+Application-4=
+Application-5=
+Application-6=
+Application-7=
+Application-8=
+Application-9=

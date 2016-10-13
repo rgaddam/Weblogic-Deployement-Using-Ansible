@@ -1,0 +1,45 @@
+---
+# tasks file for ecx-liferay-autosetup-1.0.0
+
+ - name: Copy Stop Managed Server Script
+  template: src=stop-managed-server.py dest=/apps/oracle/scripts owner={{ oracle_user }} group={{ oracle_group }}
+
+ - name: Stop Managed Server
+   shell: "{{ weblogic_home }}/common/bin/wlst.sh /apps/oracle/scripts/stop-managed-server.py"
+   sudo_user: '{{ oracle_user }}'
+
+ - name: Wait for Managed Server to stop
+   wait_for: host={{ server_hostname_1 }} port={{ managed_server-1_port }} delay=2 timeout=30
+
+ - namw: wait for managerd server-2 to stop
+   wait_for: host={{ server_hostname_2 }} port={{ managed_server-2_port }} delay=2 timeout=30
+
+ - name: Copy Undeploy Script
+   template: src=undeploy.py dest=/apps/oracle/scripts owner={{ oracle_user }} group={{ oracle_group }}
+
+ - name: Undeploy the war file
+   shell: "{{ weblogic_home }}/common/bin/wlst.sh /apps/oracle/scripts/undeploy.py"
+   sudo_user: '{{ oracle_user }}'
+
+ - name: Copy Audit-Portlet.war
+   get_url: http://Github.com/Deployable/{{ release-folder }}/{{ecx-liferay-autosetup-1.0.0}} dest=/apps/oracle/domains/deploy mode=0755
+
+ - name: Copy Deploy Script
+   template: src=deploy.py dest=/apps/oracle/scripts owner={{ oracle_user }} group={{ oracle_group }}
+
+ - name: Deploy the war file
+   shell: "{{ weblogic_home }}/common/bin/wlst.sh /apps/oracle/scripts/deploy.py"
+   sudo_user: '{{ oracle_user }}'
+
+ - name: Copy Start managed server script
+   template: src=start-managed-server.py dest=/apps/oracle/scripts owner={{ oracle_user }} group={{ oracle_group }}
+
+ - name: Start Managed Server
+   shell: "{{ weblogic_home }}/common/bin/wlst.sh /apps/oracle/scripts/start-managed-server.py"
+   sudo_user: '{{ oracle_user }}'
+
+ - name: Wait for Managed Server to start
+   wait_for: host={{ server_hostname_1 }} port={{ managed_server-1_port }} delay=2 timeout=30
+
+ - name: Wait for Managed Sever-2 to start
+   wait_for: host={{ server_hostname_2 }} port={{ managed_server-2_port }} delay=2 timeout=30
