@@ -1,4 +1,4 @@
-# Weblogic-Deployement
+# Weblogic-Deployement-Using-Ansible
 
 Ansible playbook will help us deploying Application's on Weblogic Server.
 
